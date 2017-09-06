@@ -134,8 +134,14 @@ class Client implements RequestableInterface {
             $params = json_encode($params);
         }
 
-        $this->request = $this->client->createRequest($action,
-            $this->buildUrl($endpoint), ['auth' => [$this->key, 'X'], 'body' => $params]
+        $options = ['auth' => [$this->key, 'X']];
+
+        if ($action == 'POST') {
+            $options = array_merge(['body' => $params], $options);
+        }
+
+            $this->request = $this->client->request($action,
+            $this->buildUrl($endpoint), $options
         );
 
         if ($query != null)
@@ -154,9 +160,9 @@ class Client implements RequestableInterface {
      */
     public function response()
     {
-        $this->response = $this->client->send($this->request);
-
-        return $this->response->json();
+        $this->response = $this->request->getBody();
+        
+        return $this->response->getContents();
     }
 
     /**
