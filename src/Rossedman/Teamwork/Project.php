@@ -174,6 +174,17 @@ class Project extends AbstractObject {
     }
 
     /**
+     * Tasks
+     * GET /projects/{project_id}/tasks.json
+     *
+     * @return [type] [description]
+     */
+    public function tasks($args = null)
+    {
+        return $this->client->get("$this->endpoint/$this->id/tasks", $args)->response();
+    }
+
+    /**
      * Emailaddresses
      * GET /projects/{project_id}/emailaddress.json
      *
