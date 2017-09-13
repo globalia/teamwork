@@ -21,4 +21,39 @@ class Time extends AbstractObject {
 
         return $this->client->get($this->endpoint, $args)->response();
     }
+
+    /**
+     * GET /time_entries/id.json
+     *
+     * @return mixed
+     */
+    public function find($args = null)
+    {
+        $this->areArgumentsValid($args, ['page']);
+
+        return $this->client->get("$this->endpoint/$this->id.json", $args)->response();
+    }
+
+    /**
+     * Edit A Time entry
+     * PUT /time_entries/{id}.json
+     *
+     * @return mixed
+     */
+    public function edit($data)
+    {
+        return $this->client->put("$this->endpoint/$this->id.json", ['time-entry' => $data])->response();
+    }
+
+    /**
+     * Delete A Time entry
+     * DELETE /time_entries/{id}.json
+     *
+     * @return mixed
+     */
+    public function delete()
+    {
+        return $this->client->delete("$this->endpoint/$this->id.json")->response();
+    }
+
 }
