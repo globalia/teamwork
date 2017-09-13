@@ -60,6 +60,19 @@ class Task extends AbstractObject {
     }
     
     /**
+     * Create Time Entry
+     * POST /tasks/{id}/time_entries.json
+     *
+     * @param $data
+     *
+     * @return mixed
+     */
+    public function createTime($data)
+    {
+        return $this->client->post("$this->endpoint/$this->id/time_entries", ['time-entry' => $data])->response();
+    }
+
+    /**
      * Edit A Task
      * PUT tasks/{id}.json
      *
