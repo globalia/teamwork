@@ -15,9 +15,9 @@ class Time extends AbstractObject {
      *
      * @return mixed
      */
-    public function all($args = null)
+    public function all($args)
     {
-        $this->areArgumentsValid($args, ['page']);
+        $this->areArgumentsValid($args, ['page', 'pageSize']);
 
         return $this->client->get($this->endpoint, $args)->response();
     }
@@ -29,7 +29,7 @@ class Time extends AbstractObject {
      */
     public function find($args = null)
     {
-        $this->areArgumentsValid($args, ['page']);
+        $this->areArgumentsValid($args, ['page', 'pageSize']);
 
         return $this->client->get("$this->endpoint/$this->id.json", $args)->response();
     }
