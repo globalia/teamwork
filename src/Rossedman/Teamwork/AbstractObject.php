@@ -56,8 +56,8 @@ abstract class AbstractObject {
             return;
         }
         
-        foreach ($args as $arg) {
-            if (! array_key_exists($arg, $accepted)) {
+        foreach ($args as $arg => $value) {
+            if (! in_array($arg, $accepted)) {
                 throw new \InvalidArgumentException('This call only accepts these arguments: ' . implode(" | ",$accepted));
             }
         }
