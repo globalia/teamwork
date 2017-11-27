@@ -15,7 +15,7 @@ class Time extends AbstractObject {
      *
      * @return mixed
      */
-    public function all($args)
+    public function all($args = null)
     {
         $this->areArgumentsValid($args, ['page', 'pageSize']);
 
