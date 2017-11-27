@@ -135,19 +135,20 @@ class Client implements RequestableInterface {
         }
 
         $options = ['auth' => [$this->key, 'X']];
+        
+        
+        if ($query != null)
+        {
+            $options['query'] = $query;
+        }
 
         if ($action == 'POST' | $action == 'PUT') {
             $options = array_merge(['body' => $params], $options);
         }
 
-            $this->request = $this->client->request($action,
+        $this->request = $this->client->request($action,
             $this->buildUrl($endpoint), $options
         );
-
-        if ($query != null)
-        {
-            $this->buildQuery($query);
-        }
 
         return $this;
     }
@@ -189,25 +190,6 @@ class Client implements RequestableInterface {
         }
 
         return $this->url . $endpoint . '.' . $this->dataFormat;
-    }
-
-    /**
-     * Build Query String
-     *
-     * if a query string is needed it will be built up
-     * and added to the request. This is only used in certain
-     * GET requests
-     *
-     * @param $query
-     */
-    public function buildQuery($query)
-    {
-        $q = $this->request->getQuery();
-
-        foreach ($query as $key => $value)
-        {
-            $q[$key] = $value;
-        }
     }
 
     /**
