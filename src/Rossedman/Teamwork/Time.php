@@ -15,11 +15,11 @@ class Time extends AbstractObject {
      *
      * @return mixed
      */
-    public function all($args = null)
+    public function all($args = null, $fullResponse = false)
     {
         $this->areArgumentsValid($args, ['page', 'pageSize']);
 
-        return $this->client->get($this->endpoint, $args)->response();
+        return $this->client->get($this->endpoint, $args)->response($fullResponse);
     }
 
     /**

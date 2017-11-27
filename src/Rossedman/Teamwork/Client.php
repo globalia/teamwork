@@ -159,8 +159,12 @@ class Client implements RequestableInterface {
      * this send the request from the built response and
      * returns the response as a JSON payload
      */
-    public function response()
+    public function response($fullResponse = false)
     {
+        if ($fullResponse) {
+            return $this->request;
+        }
+        
         $this->response = $this->request->getBody();
         
         return $this->response->getContents();
