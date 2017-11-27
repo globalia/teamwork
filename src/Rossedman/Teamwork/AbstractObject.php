@@ -55,15 +55,13 @@ abstract class AbstractObject {
         {
             return;
         }
-
-        foreach ($accepted as $accept)
-        {
-            if (array_key_exists($accept, $args))
-            {
-                return true;
+        
+        foreach ($args as $arg) {
+            if (! array_key_exists($arg, $accepted)) {
+                throw new \InvalidArgumentException('This call only accepts these arguments: ' . implode(" | ",$accepted));
             }
         }
-
-        throw new \InvalidArgumentException('This call only accepts these arguments: ' . implode(" | ",$accepted));
+        
+        return true;
     }
 }
