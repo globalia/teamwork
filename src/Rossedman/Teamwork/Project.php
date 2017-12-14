@@ -206,5 +206,16 @@ class Project extends AbstractObject {
         return $this->client->get("$this->endpoint/$this->id/roles", $args)->response();
     }
 
+    /**
+     * Times
+     * GET /projects/{project_id}/time_entries.json
+     *
+     * @return [type] [description]
+     */
+    public function timeEntries($args = null)
+    {
+        return $this->client->get("$this->endpoint/$this->id/time_entries", $args)->response();
+    }
+
 
 }
