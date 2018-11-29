@@ -47,6 +47,21 @@ class Project extends AbstractObject {
     }
 
     /**
+     * Add people to project
+     * POST /projects/{project_id}/people.json
+     *
+     * @param $arg integer|array
+     *
+     * @return mixed
+     */
+    public function addPeople($arg) {
+        if(is_array($arg)) {
+            $arg = join(',', $arg);
+        }
+        return $this->client->post("$this->endpoint/$this->id/people", ['add' => ['userIdList' => $arg]])->response();
+    }
+
+    /**
      * Get Starred Projects
      * GET /projects/starred.json
      *
